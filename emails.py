@@ -5,7 +5,15 @@
 import email.message
 import mimetypes
 import os.path
+import os
 import smtplib
+import dotenv
+
+dotenv.load_dotenv()
+
+EMAIL_ID = os.environ.get('EMAIL', "example@example.com")
+EMAIL_PASSWORD = os.environ.get('PASSWORD', "password")
+EMAIL_TO = os.environ.get('EMAIL_TO', "example2@example.com")
 
 
 def generate(sender, recipient, subject, body, attachment_path):
@@ -37,14 +45,11 @@ def send(message):
     mail_server.send_message(message)
     mail_server.quit()
 
-# def send_mail(name, email, phone, message):
-#     with smtplib.SMTP("smtp.office365.com", port=587) as connection:
-#         connection.starttls()
-#         connection.login(EMAIL_ID, EMAIL_PASSWORD)
-#         msg = EmailMessage()
-#         email_body = f"From: {name}\nEmail: {email}\nPhone Number: {phone}\nMessage: {message}"
-#         msg.set_content(email_body)
-#         msg["Subject"] = "You have a new mail from your portfolio website."
-#         msg["To"] = EMAIL_TO
-#         msg["From"] = EMAIL_ID
-#         connection.send_message(msg)
+
+def send_mail(message):
+    with smtplib.SMTP("smtp.office365.com", port=587) as connection:
+        connection.starttls()
+        connection.login(EMAIL_ID, EMAIL_PASSWORD)
+
+        print(message)
+        connection.send_message(message)
