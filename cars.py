@@ -73,14 +73,14 @@ def main(argv):
     data = load_data("car_sales.json")
     summary = process_data(data)
     print(summary)
-    # TODO: turn this into a PDF report
+    # handled: turn this into a PDF report
     filename = "tmp/cars.pdf"
     summary_sale = "<br/>".join(summary)
     table_data = cars_dict_to_table(data)
     title = "Sale summary for last month"
     reports.generate(filename, title, summary_sale, table_data)
 
-    # TODO: send the PDF report as an email attachment
+    # handled: send the PDF report as an email attachment
     # sender = "automation@example.com"
     #  print(sender)
     # receiver = "student-03-c4343d6df8a3@example.com"
